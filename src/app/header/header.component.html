@@ -1,0 +1,83 @@
+<header class="fixed top-0 left-0 w-full h-[100px] bg-white shadow-md z-10">
+  <div class="flex justify-between items-center h-full px-8">
+    <!-- Logo / Branding -->
+    <div class="text-xl font-bold text-gray-800 mr-8">
+      <a routerLink="/">Rich Lamiroult Photography</a>
+    </div>
+
+    <!-- Menu Items (Desktop) -->
+    <nav class="hidden md:flex space-x-6 text-gray-600">
+      <a routerLink="/galleries" class="hover:text-gray-800">Galleries</a>
+      <a routerLink="/contact" class="hover:text-gray-800">Contact</a>
+      <a routerLink="/about" class="hover:text-gray-800">About</a>
+    </nav>
+
+    <!-- Social Media Icons (Desktop) -->
+    <div class="hidden md:flex space-x-6 ml-auto">
+      <a
+        href="https://www.instagram.com/richlamiroultphotography/"
+        target="_blank"
+        class="text-gray-600 hover:text-gray-800"
+      >
+        <i class="fab fa-instagram text-2xl"></i>
+      </a>
+      <a
+        href="https://www.flickr.com/photos/richlamiroult"
+        target="_blank"
+        class="text-gray-600 hover:text-gray-800"
+      >
+        <i class="fab fa-flickr text-2xl"></i>
+      </a>
+    </div>
+
+    <!-- Hamburger Icon (Mobile) -->
+    <button
+      (click)="isMenuOpen = !isMenuOpen"
+      class="md:hidden text-gray-600 hover:text-gray-800"
+    >
+      <i class="fas fa-bars text-2xl"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Menu (Only visible when isMenuOpen is true) -->
+  <div *ngIf="isMenuOpen" class="md:hidden bg-white shadow-md">
+    <nav class="space-y-4 p-4">
+      <a
+        routerLink="/galleries"
+        class="block text-gray-600 hover:text-gray-800"
+        (click)="closeMenu()"
+        >Galleries</a
+      >
+      <a
+        routerLink="/contact"
+        class="block text-gray-600 hover:text-gray-800"
+        (click)="closeMenu()"
+        >Contact</a
+      >
+      <a
+        routerLink="/about"
+        class="block text-gray-600 hover:text-gray-800"
+        (click)="closeMenu()"
+        >About</a
+      >
+    </nav>
+
+    <!-- Social Media Icons (Mobile) -->
+    <div class="space-x-6 p-4">
+      <a
+        href="https://www.instagram.com/richlamiroultphotography/"
+        target="_blank"
+        class="text-gray-600 hover:text-gray-800"
+      >
+        <i class="fab fa-instagram text-2xl"></i>
+      </a>
+      <a
+        href="https://www.flickr.com/photos/richlamiroult"
+        target="_blank"
+        class="text-gray-600 hover:text-gray-800"
+      >
+        <i class="fab fa-flickr text-2xl"></i>
+      </a>
+    </div>
+  </div>
+</header>

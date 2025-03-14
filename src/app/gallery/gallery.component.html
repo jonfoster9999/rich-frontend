@@ -1,0 +1,18 @@
+<div class="gallery-container">
+  <div class="artworks-grid masonry">
+    <div
+      *ngFor="let artwork of gallery?.artworks"
+      class="artwork"
+      (click)="openLightbox(artwork.artwork_url)"
+    >
+      <img [src]="artwork.artwork_url" [alt]="artwork.title || 'Artwork'" />
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox Overlay -->
+<div class="lightbox-overlay" *ngIf="lightboxVisible" (click)="closeLightbox()">
+  <div class="lightbox-content" (click)="closeLightbox()">
+    <img [src]="lightboxImage" [alt]="'Enlarged Artwork'" />
+  </div>
+</div>
