@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GalleryService, Gallery } from '../gallery.service';
+import { GalleryService, Gallery, HOME_GALLERY_ID } from '../gallery.service';
 import { Artwork } from '../artworks/artwork.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -22,6 +22,9 @@ export class AdminComponent implements OnInit {
   isUploading: boolean = false;
   message: string = '';
 
+  // Make HOME_GALLERY_ID accessible in the template
+  readonly HOME_GALLERY_ID = HOME_GALLERY_ID;
+
   constructor(
     private galleryService: GalleryService,
     private http: HttpClient
@@ -39,6 +42,12 @@ export class AdminComponent implements OnInit {
 
   selectGallery(gallery: Gallery): void {
     this.galleryService.getGalleryById(gallery.id).subscribe((data) => {
+      this.currentGallery = data;
+    });
+  }
+
+  selectHomeGallery(): void {
+    this.galleryService.getGalleryById(HOME_GALLERY_ID).subscribe((data) => {
       this.currentGallery = data;
     });
   }

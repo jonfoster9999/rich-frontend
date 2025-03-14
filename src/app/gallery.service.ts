@@ -11,6 +11,9 @@ export interface Gallery {
   artworks?: Artwork[];
 }
 
+// Define constants outside the interface
+export const HOME_GALLERY_ID = -1;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -20,7 +23,6 @@ export class GalleryService {
   constructor(private http: HttpClient) {}
 
   getGalleries(): Observable<Gallery[]> {
-    console.log(`about to call ${this.baseUrl}/galleries`);
     return this.http.get<Gallery[]>(`${this.baseUrl}/galleries`);
   }
 

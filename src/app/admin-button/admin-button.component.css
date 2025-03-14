@@ -15,11 +15,12 @@
 
 .admin-dot {
   display: block;
-  width: 6px;
-  height: 6px;
-  background-color: #999;
+  width: 10px;
+  height: 10px;
+  background-color: #333;
   border-radius: 50%;
-  opacity: 0.5;
+  opacity: 0.8;
+  border: 1px solid #666;
 }
 
 .admin-dot:hover {

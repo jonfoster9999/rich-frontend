@@ -24,6 +24,16 @@
         <!-- Gallery List -->
         <div class="mb-6 max-h-80 overflow-y-auto">
           <ul class="divide-y divide-gray-200">
+            <!-- Home Gallery (Special) -->
+            <li
+              class="py-2 cursor-pointer hover:bg-gray-50 border-b-2 border-blue-300 mb-2"
+              [class.bg-blue-50]="currentGallery?.id === HOME_GALLERY_ID"
+              (click)="selectHomeGallery()"
+            >
+              <span class="font-semibold">Home Page Gallery</span>
+            </li>
+
+            <!-- Regular Galleries -->
             <li
               *ngFor="let gallery of galleries"
               class="py-2 cursor-pointer hover:bg-gray-50"

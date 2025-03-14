@@ -16,7 +16,7 @@ export class AdminButtonComponent {
   errorMessage: string = '';
 
   // Static password for simplicity - in a real app, you'd validate against a backend
-  private readonly ADMIN_PASSWORD = 'photography-admin-2024';
+  private readonly ADMIN_PASSWORD = 'rich';
 
   constructor(private router: Router) {}
 

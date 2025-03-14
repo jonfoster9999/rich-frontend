@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { GalleryService } from '../gallery.service';
+import { GalleryService, HOME_GALLERY_ID } from '../gallery.service';
+
 @Component({
   selector: 'app-main',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css',
@@ -24,7 +26,7 @@ export class MainComponent implements OnInit {
 
   fetchGallery(): void {
     this.galleryService
-      .getGalleryById(-1)
+      .getGalleryById(HOME_GALLERY_ID)
       .subscribe((data) => (this.gallery = data));
   }
 
