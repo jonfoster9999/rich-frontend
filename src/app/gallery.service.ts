@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
+import { Artwork } from './artworks/artwork.model';
 
 export interface Gallery {
   id: number;
   name: string;
-  sort_order: number;
+  sort_order?: number;
+  artworks?: Artwork[];
 }
 
 @Injectable({

@@ -1,0 +1,22 @@
+/* Additional styles for the admin page */
+.container {
+  padding-top: 150px; /* Account for the fixed header */
+}
+
+/* Style for the file input */
+input[type="file"] {
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+}
+
+/* Hover effect for gallery items */
+.gallery-item:hover {
+  background-color: #f7fafc;
+}
+
+/* Selected gallery highlight */
+.gallery-item.selected {
+  background-color: #ebf8ff;
+  border-left: 3px solid #4299e1;
+}

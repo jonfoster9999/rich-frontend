@@ -1,0 +1,35 @@
+<!-- Inconspicuous admin button -->
+<div class="admin-button">
+  <button (click)="openDialog()" class="admin-link">
+    <!-- Using a small dot as an inconspicuous button -->
+    <span class="admin-dot"></span>
+  </button>
+</div>
+
+<!-- Admin Password Dialog -->
+<div *ngIf="showDialog" class="dialog-overlay">
+  <div class="dialog-content" (click)="$event.stopPropagation()">
+    <div class="dialog-header">
+      <h3 class="dialog-title">Admin Access</h3>
+      <button (click)="closeDialog()" class="dialog-close">×</button>
+    </div>
+
+    <div class="dialog-body">
+      <p>Please enter the admin password:</p>
+      <input
+        type="password"
+        [(ngModel)]="password"
+        class="password-input"
+        placeholder="Password"
+        (keyup.enter)="submitPassword()"
+      />
+
+      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+    </div>
+
+    <div class="dialog-footer">
+      <button (click)="closeDialog()" class="btn-cancel">Cancel</button>
+      <button (click)="submitPassword()" class="btn-submit">Login</button>
+    </div>
+  </div>
+</div>

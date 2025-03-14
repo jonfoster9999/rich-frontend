@@ -1,0 +1,166 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Photography Admin</h1>
+
+  <!-- Alert Message -->
+  <div
+    *ngIf="message"
+    class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-6 relative"
+  >
+    <span>{{ message }}</span>
+    <button
+      (click)="clearMessage()"
+      class="absolute top-2 right-2 text-blue-700"
+    >
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="flex flex-col md:flex-row gap-8">
+    <!-- Left Panel - Gallery Management -->
+    <div class="md:w-1/3">
+      <div class="bg-white shadow rounded-lg p-6 mb-6">
+        <h2 class="text-xl font-semibold mb-4">Galleries</h2>
+
+        <!-- Gallery List -->
+        <div class="mb-6 max-h-80 overflow-y-auto">
+          <ul class="divide-y divide-gray-200">
+            <li
+              *ngFor="let gallery of galleries"
+              class="py-2 cursor-pointer hover:bg-gray-50"
+              [class.bg-blue-50]="currentGallery?.id === gallery.id"
+              (click)="selectGallery(gallery)"
+            >
+              {{ gallery.name }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Create New Gallery -->
+        <div class="mb-4">
+          <h3 class="text-lg font-medium mb-2">Create New Gallery</h3>
+          <div class="flex">
+            <input
+              type="text"
+              [(ngModel)]="newGalleryName"
+              class="border rounded-l px-3 py-2 w-full"
+              placeholder="Gallery Name"
+            />
+            <button
+              (click)="createGallery()"
+              class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600"
+            >
+              Create
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel - Selected Gallery Details -->
+    <div class="md:w-2/3" *ngIf="currentGallery">
+      <div class="bg-white shadow rounded-lg p-6 mb-6">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold">Edit Gallery</h2>
+          <button
+            (click)="deleteGallery()"
+            class="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600"
+          >
+            Delete Gallery
+          </button>
+        </div>
+
+        <!-- Edit Gallery Name -->
+        <div class="mb-6">
+          <label class="block text-gray-700 mb-2">Gallery Name</label>
+          <div class="flex">
+            <input
+              type="text"
+              [(ngModel)]="currentGallery.name"
+              class="border rounded-l px-3 py-2 w-full"
+            />
+            <button
+              (click)="updateGallery()"
+              class="bg-green-500 text-white px-4 py-2 rounded-r hover:bg-green-600"
+            >
+              Update
+            </button>
+          </div>
+        </div>
+
+        <!-- Upload Images -->
+        <div class="mb-6">
+          <h3 class="text-lg font-medium mb-2">Upload Images</h3>
+          <div class="mb-4">
+            <input
+              type="file"
+              (change)="onFileSelected($event)"
+              multiple
+              class="border rounded px-3 py-2 w-full"
+              accept="image/*"
+            />
+          </div>
+
+          <div *ngIf="selectedFiles.length > 0" class="mb-4">
+            <p>{{ selectedFiles.length }} files selected</p>
+            <button
+              (click)="uploadFiles()"
+              [disabled]="isUploading"
+              class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-blue-300"
+            >
+              {{ isUploading ? "Uploading..." : "Upload Files" }}
+            </button>
+          </div>
+
+          <!-- Upload Progress -->
+          <div *ngIf="isUploading" class="mb-4">
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+              <div
+                class="bg-blue-600 h-2.5 rounded-full"
+                [style.width.%]="uploadProgress"
+              ></div>
+            </div>
+            <p class="text-sm text-gray-600 mt-1">
+              {{ uploadProgress }}% Complete
+            </p>
+          </div>
+        </div>
+
+        <!-- Gallery Images Grid -->
+        <h3 class="text-lg font-medium mb-2">Gallery Images</h3>
+        <div
+          *ngIf="
+            currentGallery.artworks && currentGallery.artworks.length > 0;
+            else noImages
+          "
+          class="grid grid-cols-2 sm:grid-cols-3 gap-4"
+        >
+          <div
+            *ngFor="let artwork of currentGallery.artworks"
+            class="relative group"
+          >
+            <img
+              [src]="artwork.artwork_url"
+              [alt]="artwork.caption || 'Artwork'"
+              class="w-full h-32 object-cover rounded"
+            />
+            <div
+              class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              <button
+                (click)="deleteArtwork(artwork.id)"
+                class="bg-red-500 text-white px-2 py-1 rounded text-sm hover:bg-red-600"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+        <ng-template #noImages>
+          <p class="text-gray-500 italic">
+            This gallery has no images. Upload some using the form above.
+          </p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
